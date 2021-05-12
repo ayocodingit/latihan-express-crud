@@ -1,31 +1,19 @@
-const conn = require('../config/db')
+const sequelize = require('sequelize')
+const database = require('../config/database')
+const { DataTypes } = sequelize
 
-const user = (user) => {
-    this.username = user.username
-    this.email = user.email
-    this.password = user.password
-    this.created_at = new Date()
-    this.updated_at = new Date()
-}
+const User = database.define('user', {
+    username: {
+        type: DataTypes.STRING
+    },
+    email: {
+        type: DataTypes.STRING
+    },
+    password: {
+        type: DataTypes.STRING
+    },
+}, {
+    freezeTableName: true
+});
 
-user.getAll = (result) => {
-    conn.query('SELECT * FROM user', (err, res) => {
-        if (err) {
-            result(null, err)
-        } else {
-            result(null, res)
-        }
-    })
-}
-
-user.getByID = (id, result) => {
-    conn.query('SELECT * FROM user WHERE id=?', id, (err, res) => {
-        if (err) {
-            result(null, err)
-        } else {
-            result(null, res)
-        }
-    })
-}
-
-module.exports = user
+module.exports = User;

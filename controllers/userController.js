@@ -1,21 +1,23 @@
-const user = require('../models/userModel')
+const User = require('../models/userModel')
 
-exports.index = (req, res) => {
-    user.getAll((err, user) => {
-        if (err) {
-            res.json(err)
-        }
-
-        res.json(user)
-    })
+exports.index = async (req, res) => {
+    try {
+        const user = await User.findAll({ limit: 1 });
+        res.send(user);
+    } catch (err) {
+        console.log(err);
+    }
 }
 
-exports.show = (req, res) => {
-    user.getByID(req.params.id, (err, user) => {
-        if (err) {
-            res.json(err)
-        }
-
-        res.json(user)
-    })
+exports.show = async (req, res) => {
+   try {
+       const user = await User.findAll({
+           where: {
+               id: req.params.id
+           }
+       });
+       res.send(user[0]);
+   } catch (err) {
+       console.log(err);
+   }
 }
