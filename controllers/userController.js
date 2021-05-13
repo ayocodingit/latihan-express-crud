@@ -1,8 +1,8 @@
-const User = require('../models/userModel')
+const { user: User } = require('../models')
 
 exports.index = async (req, res) => {
     try {
-        const user = await User.findAll({ limit: 1 });
+        const user = await User.findAll();
         res.send(user);
     } catch (err) {
         console.log(err);
@@ -11,12 +11,13 @@ exports.index = async (req, res) => {
 
 exports.show = async (req, res) => {
    try {
-       const user = await User.findAll({
+       const user = await User.findOne({
            where: {
                id: req.params.id
-           }
+           },
+           attributes: ['id', 'username', 'email']
        });
-       res.send(user[0]);
+       res.send(user);
    } catch (err) {
        console.log(err);
    }
