@@ -15,5 +15,6 @@ const router = require('./routes/route')
 app.use('/api/', router)
 
 const port = process.env.PORT || 3000
+const host = process.env.HOST
 
-app.listen(port, () => console.log(`app listening at http://localhost:${port}`))
+app.listen(port, host, () => console.log(`app listening at http://${host}:${port}`))
