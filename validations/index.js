@@ -2,7 +2,7 @@ exports.options = {
     abortEarly: false,
 } 
 
-exports.ErrorMessages = (result) => {
+exports.errorMessages = (result) => {
     const { error } = result
     if (error) {
         const { details } = error;

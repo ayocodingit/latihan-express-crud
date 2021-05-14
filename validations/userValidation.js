@@ -1,5 +1,5 @@
 const Joi = require('@hapi/joi')
-const { options, ErrorMessages } = require('./index')
+const { options, errorMessages } = require('./index')
 
 const defaultValidUser = Joi.object().keys({
     username: Joi.string().required().min(3),
@@ -9,5 +9,5 @@ const defaultValidUser = Joi.object().keys({
 
 exports.store = (user) => {
     const result = Joi.validate(user, defaultValidUser, options);
-    return ErrorMessages(result)
+    return errorMessages(result)
 }
